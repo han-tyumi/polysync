@@ -9,6 +9,8 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
+const modsPath = "mods"
+
 type poly struct {
 	*sftp.Client
 }
@@ -47,12 +49,7 @@ func connect() (*poly, error) {
 func (p *poly) Mods() ([]fync.ServerFile, error) {
 	l.Println("getting list of server mods ...")
 
-	dir, err := p.Getwd()
-	if err != nil {
-		return nil, err
-	}
-
-	files, err := p.ReadDir("mods")
+	files, err := p.ReadDir(modsPath)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +57,7 @@ func (p *poly) Mods() ([]fync.ServerFile, error) {
 	mods := make([]fync.ServerFile, 0)
 	for i := range files {
 		if !files[i].IsDir() && strings.HasSuffix(files[i].Name(), ".jar") {
-			file, err := p.Open(path.Join(dir, "mods", files[i].Name()))
+			file, err := p.Open(path.Join(modsPath, files[i].Name()))
 			if err != nil {
 				return nil, err
 			}
