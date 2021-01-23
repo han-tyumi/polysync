@@ -23,25 +23,25 @@ func init() {
 	}
 }
 
-func downloadLauncher() error {
+func downloadLauncher() (string, error) {
 	if launcherURL == "" {
-		return errors.New("platform not supported")
+		return "", errors.New("platform not supported")
 	}
 
 	home, err := os.UserHomeDir()
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	l.Printf("downloading %s ...\n", launcherURL)
 	res, err := http.Get(launcherURL)
 	if err != nil {
-		return err
+		return "", err
 	}
 	defer res.Body.Close()
 
 	if res.StatusCode != 200 {
-		return errors.New(res.Status)
+		return "", errors.New(res.Status)
 	}
 
 	name := path.Base(launcherURL)
@@ -50,13 +50,13 @@ func downloadLauncher() error {
 	l.Printf("copying to %s ...\n", dest)
 	file, err := os.Create(dest)
 	if err != nil {
-		return err
+		return "", err
 	}
 	defer file.Close()
 
 	if _, err := io.Copy(file, res.Body); err != nil {
-		return err
+		return "", err
 	}
 
-	return nil
+	return dest, nil
 }

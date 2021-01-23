@@ -84,11 +84,12 @@ func main() {
 					widget.NewButton("Download Minecraft Launcher", func() {
 						progress.startInfinite()
 						l.Println("starting launcher download ...")
-						if err := downloadLauncher(); err != nil {
-							l.Printf("error installing: %s\n", err)
+						if _, err := downloadLauncher(); err != nil {
+							l.Printf("error downloading: %s\n", err)
+						} else {
+							l.Println("finished launcher download")
 						}
 						progress.stopInfinite()
-						l.Println("finished launcher download")
 					}),
 				),
 			),
