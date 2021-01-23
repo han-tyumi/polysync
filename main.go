@@ -12,7 +12,7 @@ import (
 )
 
 var l *log.Logger
-var progress *widget.ProgressBar
+var progress *progressBar
 
 func runSync(keepExisting, force bool) (int, error) {
 	poly, err := connect()
@@ -60,26 +60,37 @@ func main() {
 	keepExistingCheck := widget.NewCheck("Keep Existing", nil)
 	forceCheck := widget.NewCheck("Force", nil)
 
-	progress = widget.NewProgressBar()
+	progress = newProgressBar()
 
 	w.SetContent(
 		container.NewBorder(
 			nil,
 			container.NewVBox(
-				progress,
+				progress.container(),
 				container.NewHBox(keepExistingCheck, forceCheck),
-				widget.NewButton("Sync", func() {
-					progress.SetValue(0)
-					l.Println("starting sync ...")
-					n, err := runSync(keepExistingCheck.Checked, forceCheck.Checked)
-					if err != nil {
-						l.Printf("error syncing: %s", err)
-					} else if n == 0 {
-						l.Println("already up to date")
-					} else {
-						l.Println("finished sync")
-					}
-				}),
+				container.NewHBox(
+					widget.NewButton("Sync", func() {
+						progress.SetValue(0)
+						l.Println("starting sync ...")
+						n, err := runSync(keepExistingCheck.Checked, forceCheck.Checked)
+						if err != nil {
+							l.Printf("error syncing: %s\n", err)
+						} else if n == 0 {
+							l.Println("already up to date")
+						} else {
+							l.Println("finished sync")
+						}
+					}),
+					widget.NewButton("Download Minecraft Launcher", func() {
+						progress.startInfinite()
+						l.Println("starting launcher download ...")
+						if err := downloadLauncher(); err != nil {
+							l.Printf("error installing: %s\n", err)
+						}
+						progress.stopInfinite()
+						l.Println("finished launcher download")
+					}),
+				),
 			),
 			nil,
 			nil,
