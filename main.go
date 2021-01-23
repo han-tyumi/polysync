@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"os"
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
@@ -13,30 +12,6 @@ import (
 
 var l *log.Logger
 var progress *progressBar
-
-func runSync(keepExisting, force bool) (int, error) {
-	poly, err := connect()
-	if err != nil {
-		return 0, err
-	}
-
-	options := &fync.SyncOptions{
-		KeepExisting: keepExisting,
-		Force:        force,
-		OnWrite: func(from os.FileInfo, _ string) {
-			l.Printf("copying %s ...\n", from.Name())
-		},
-		OnBackup: func(name, _, _ string) {
-			l.Printf("backing up %s ... \n", name)
-		},
-		OnProgress: func(_ string, curr, total int) {
-			progress.Max = float64(total)
-			progress.SetValue(float64(curr))
-		},
-	}
-
-	return fync.Sync(poly, options)
-}
 
 func main() {
 	a := app.New()
@@ -72,7 +47,7 @@ func main() {
 					widget.NewButton("Sync", func() {
 						progress.SetValue(0)
 						l.Println("starting sync ...")
-						n, err := runSync(keepExistingCheck.Checked, forceCheck.Checked)
+						n, err := syncMods(keepExistingCheck.Checked, forceCheck.Checked)
 						if err != nil {
 							l.Printf("error syncing: %s\n", err)
 						} else if n == 0 {
