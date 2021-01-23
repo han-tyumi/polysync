@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+fyne-cross windows
+fyne-cross darwin
+fyne-cross linux
