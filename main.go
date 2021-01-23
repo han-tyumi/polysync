@@ -57,17 +57,6 @@ func main() {
 						}
 					}),
 
-					widget.NewButton("Download Minecraft Launcher", func() {
-						progress.startInfinite()
-						l.Println("starting launcher download ...")
-						if _, err := downloadLauncher(); err != nil {
-							l.Printf("error downloading: %s\n", err)
-						} else {
-							l.Println("finished launcher download")
-						}
-						progress.stopInfinite()
-					}),
-
 					widget.NewButton("Download Forge Installer", func() {
 						progress.startInfinite()
 						l.Println("starting forge installer download ...")
@@ -75,6 +64,17 @@ func main() {
 							l.Printf("error downloading: %s\n", err)
 						} else {
 							l.Println("finished forge installer download")
+						}
+						progress.stopInfinite()
+					}),
+
+					widget.NewButton("Download Minecraft Launcher", func() {
+						progress.startInfinite()
+						l.Println("starting launcher download ...")
+						if _, err := downloadLauncher(); err != nil {
+							l.Printf("error downloading: %s\n", err)
+						} else {
+							l.Println("finished launcher download")
 						}
 						progress.stopInfinite()
 					}),
