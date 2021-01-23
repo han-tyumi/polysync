@@ -15,7 +15,7 @@ var progress *progressBar
 
 func main() {
 	a := app.New()
-	w := a.NewWindow("Polygondwanaland Sync")
+	w := a.NewWindow("PolySync")
 
 	console := newConsole()
 	l = log.New(console, "", log.Ltime)
