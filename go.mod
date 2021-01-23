@@ -1,4 +1,4 @@
-module github.com/han-tyumi/poly
+module github.com/han-tyumi/polysync
 
 go 1.15
 
