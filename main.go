@@ -2,6 +2,8 @@ package main
 
 import (
 	"log"
+	"os/exec"
+	"runtime"
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
@@ -77,6 +79,26 @@ func main() {
 							l.Println("finished launcher download")
 						}
 						progress.stopInfinite()
+					}),
+
+					widget.NewButton("Mods Folder", func() {
+						var cmd string
+
+						switch runtime.GOOS {
+						case "windows":
+							cmd = "explorer"
+						case "darwin":
+							cmd = "open"
+						case "linux":
+							cmd = "xdg-open"
+						default:
+							return
+						}
+
+						err := exec.Command(cmd, modsDir).Run()
+						if _, ok := err.(*exec.ExitError); !ok {
+							l.Printf("error opening: %s\n", err)
+						}
 					}),
 				),
 			),

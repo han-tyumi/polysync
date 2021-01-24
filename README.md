@@ -33,3 +33,7 @@ You can download the Minecraft Launcher for your Operating System to your `Deskt
 Installation varies depending on your Operating System.
 
 See https://www.minecraft.net/en-us/download/alternative/ for alternative downloads.
+
+### Mods Folder
+
+You can open your Minecraft `mods` folder by clicking **Mods Folder**.
