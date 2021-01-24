@@ -2,11 +2,10 @@ package main
 
 import (
 	"os"
-	"path"
 	"path/filepath"
 )
 
-const forgeInstallerPath = "forge-installer.jar"
+const forgeInstaller = "forge-installer.jar"
 
 func downloadForge() (string, error) {
 	poly, err := connect()
@@ -14,19 +13,13 @@ func downloadForge() (string, error) {
 		return "", err
 	}
 
-	home, err := os.UserHomeDir()
-	if err != nil {
-		return "", err
-	}
-
-	forge, err := poly.Open(forgeInstallerPath)
+	forge, err := poly.Open(forgeInstaller)
 	if err != nil {
 		return "", err
 	}
 	defer forge.Close()
 
-	name := path.Base(forgeInstallerPath)
-	destPath := filepath.Join(filepath.Join(home, "Desktop"), name)
+	destPath := filepath.Join(downloadPath, forgeInstaller)
 
 	l.Printf("copying to %s ...\n", destPath)
 	dest, err := os.Create(destPath)
