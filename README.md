@@ -34,6 +34,6 @@ Installation varies depending on your Operating System.
 
 See https://www.minecraft.net/en-us/download/alternative/ for alternative downloads.
 
-### Mods Folder
+### Mods
 
-You can open your Minecraft `mods` folder by clicking **Mods Folder**.
+You can open your Minecraft `mods` directory in your Operating System's file explorer by clicking **Mods**.

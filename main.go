@@ -80,7 +80,7 @@ func main() {
 						progress.stopInfinite()
 					}),
 
-					widget.NewButton("Mods Folder", func() {
+					widget.NewButton("Mods", func() {
 						var cmd string
 
 						switch runtime.GOOS {
