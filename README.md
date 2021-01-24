@@ -2,7 +2,7 @@
 
 The PolySync utility can be used to sync your local Forge mods with the Polygondwanaland server.
 
-It can also download the version of [Forge](http://files.minecraftforge.net/) the server is using and the [Minecraft Launcher](https://www.minecraft.net/en-us/download/).
+It can also download the version of [Forge](http://files.minecraftforge.net/) the server is using, the [Minecraft Launcher](https://www.minecraft.net/en-us/download/), and [Java](https://www.java.com/en/download/).
 
 ## Usage
 
