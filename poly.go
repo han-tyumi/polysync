@@ -22,6 +22,7 @@ func connect() (*poly, error) {
 		return p, nil
 	}
 
+	progress.startInfinite()
 	l.Println("connecting to server ...")
 
 	config := &ssh.ClientConfig{
@@ -43,6 +44,7 @@ func connect() (*poly, error) {
 	}
 
 	p = &poly{client}
+	progress.stopInfinite()
 	return p, nil
 }
 
