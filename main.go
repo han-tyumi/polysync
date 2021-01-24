@@ -58,6 +58,26 @@ func main() {
 						}
 					}),
 
+					widget.NewButton("Mods", func() {
+						var cmd string
+
+						switch runtime.GOOS {
+						case "windows":
+							cmd = "explorer"
+						case "darwin":
+							cmd = "open"
+						case "linux":
+							cmd = "xdg-open"
+						default:
+							return
+						}
+
+						err := exec.Command(cmd, modsDir).Run()
+						if _, ok := err.(*exec.ExitError); !ok {
+							l.Printf("error opening: %s\n", err)
+						}
+					}),
+
 					widget.NewButton("Download Forge Installer", func() {
 						progress.startInfinite()
 						l.Println("starting forge installer download ...")
@@ -80,24 +100,15 @@ func main() {
 						progress.stopInfinite()
 					}),
 
-					widget.NewButton("Mods", func() {
-						var cmd string
-
-						switch runtime.GOOS {
-						case "windows":
-							cmd = "explorer"
-						case "darwin":
-							cmd = "open"
-						case "linux":
-							cmd = "xdg-open"
-						default:
-							return
+					widget.NewButton("Download Java", func() {
+						progress.startInfinite()
+						l.Println("starting java download ...")
+						if _, err := downloadJava(); err != nil {
+							l.Printf("error downloading: %s\n", err)
+						} else {
+							l.Println("finished java download")
 						}
-
-						err := exec.Command(cmd, modsDir).Run()
-						if _, ok := err.(*exec.ExitError); !ok {
-							l.Printf("error opening: %s\n", err)
-						}
+						progress.stopInfinite()
 					}),
 				),
 			),

@@ -10,21 +10,26 @@ import (
 	"runtime"
 )
 
-var launcherURL string
+var javaURL string
 
 func init() {
 	switch runtime.GOOS {
 	case "windows":
-		launcherURL = "https://launcher.mojang.com/download/MinecraftInstaller.msi"
+		javaURL = "https://javadl.oracle.com/webapps/download/AutoDL?BundleId=244065_89d678f2be164786b292527658ca1605"
 	case "darwin":
-		launcherURL = "https://launcher.mojang.com/download/Minecraft.dmg"
+		javaURL = "https://javadl.oracle.com/webapps/download/AutoDL?BundleId=244059_89d678f2be164786b292527658ca1605"
 	case "linux":
-		launcherURL = "https://launcher.mojang.com/download/Minecraft.tar.gz"
+		switch runtime.GOARCH {
+		case "amd64":
+			javaURL = "https://javadl.oracle.com/webapps/download/AutoDL?BundleId=244058_89d678f2be164786b292527658ca1605"
+		case "386":
+			javaURL = "https://javadl.oracle.com/webapps/download/AutoDL?BundleId=244056_89d678f2be164786b292527658ca1605"
+		}
 	}
 }
 
-func downloadLauncher() (string, error) {
-	if launcherURL == "" {
+func downloadJava() (string, error) {
+	if javaURL == "" {
 		return "", errors.New("platform not supported")
 	}
 
@@ -33,8 +38,8 @@ func downloadLauncher() (string, error) {
 		return "", err
 	}
 
-	l.Printf("downloading %s ...\n", launcherURL)
-	res, err := http.Get(launcherURL)
+	l.Printf("downloading %s ...\n", javaURL)
+	res, err := http.Get(javaURL)
 	if err != nil {
 		return "", err
 	}

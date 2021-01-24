@@ -16,24 +16,32 @@ This behavior can be disabled by checking **Keep Existing** before clicking **Sy
 
 You can also force the utility to overwrite existing mods by checking **Force**.
 
+### Mods
+
+You can open your Minecraft `mods` directory in your Operating System's file explorer by clicking **Mods**.
+
 ### Download Forge Installer
 
-Clicking **Download Forge Installer** will download the installer for the same version of Forge the server is using to your `Desktop`.
+Clicking **Download Forge Installer** will download the installer to your `Desktop` for the same version of Forge the server is using.
 
 After downloaded, you can install Forge by running the downloaded `forge-installer.jar` file on your `Desktop`.
 
 Select **Install client**, click **OK**, then **OK** again once complete.
 
-**NOTE: [Java](https://www.java.com/en/download/) is required in order to run the Forge installer.**
+**NOTE: Java and the Minecraft Launcher is required in order to run the Forge installer.**
 
 ### Download Minecraft Launcher
 
-You can download the Minecraft Launcher for your Operating System to your `Desktop` by clicking **Download Minecraft Launcher**.
+You can download the Minecraft Launcher to your `Desktop` for your Operating System by clicking **Download Minecraft Launcher**.
 
 Installation varies depending on your Operating System.
 
-See https://www.minecraft.net/en-us/download/alternative/ for alternative downloads.
+See https://www.minecraft.net/en-us/download/alternative/ for more information and alternative downloads.
 
-### Mods
+### Download Java
 
-You can open your Minecraft `mods` directory in your Operating System's file explorer by clicking **Mods**.
+You can download Java to your `Desktop` for your Operating System by clicking **Download Java**.
+
+Installation varies depending on your Operating System.
+
+See https://www.java.com/en/download/manual.jsp for more information and alternative downloads.
