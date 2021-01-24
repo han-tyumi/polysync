@@ -47,6 +47,7 @@ func connect() (*poly, error) {
 }
 
 func (p *poly) Mods() ([]fync.ServerFile, error) {
+	progress.SetValue(0)
 	l.Println("getting list of server mods ...")
 
 	files, err := p.ReadDir(modsPath)
@@ -54,6 +55,7 @@ func (p *poly) Mods() ([]fync.ServerFile, error) {
 		return nil, err
 	}
 
+	progress.Max = float64(len(files)) * 2
 	mods := make([]fync.ServerFile, 0)
 	for i := range files {
 		if !files[i].IsDir() && strings.HasSuffix(files[i].Name(), ".jar") {
@@ -63,6 +65,7 @@ func (p *poly) Mods() ([]fync.ServerFile, error) {
 			}
 			mods = append(mods, file)
 		}
+		progress.add(1)
 	}
 
 	return mods, nil

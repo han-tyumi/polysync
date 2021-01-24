@@ -22,8 +22,9 @@ func syncMods(keepExisting, force bool) (int, error) {
 			l.Printf("backing up %s ... \n", name)
 		},
 		OnProgress: func(_ string, curr, total int) {
-			progress.Max = float64(total)
-			progress.SetValue(float64(curr))
+			if curr != 0 {
+				progress.add(1)
+			}
 		},
 	}
 

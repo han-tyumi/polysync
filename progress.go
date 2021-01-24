@@ -23,6 +23,10 @@ func (p *progressBar) container() *fyne.Container {
 	return container.NewVBox(p.ProgressBar, p.Infinite)
 }
 
+func (p *progressBar) add(n float64) {
+	p.SetValue(p.Value + n)
+}
+
 func (p *progressBar) startInfinite() {
 	p.SetValue(p.Min)
 	p.Hide()

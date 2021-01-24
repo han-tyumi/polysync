@@ -47,7 +47,6 @@ func main() {
 				container.NewHBox(keepExistingCheck, forceCheck),
 				container.NewHBox(
 					widget.NewButton("Sync", func() {
-						progress.SetValue(0)
 						l.Println("starting sync ...")
 						n, err := syncMods(keepExistingCheck.Checked, forceCheck.Checked)
 						if err != nil {
